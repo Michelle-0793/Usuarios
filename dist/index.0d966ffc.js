@@ -560,12 +560,14 @@ function hmrAccept(bundle, id) {
 // Importar la función GetUsers desde el archivo getUsers.js en la carpeta servicios
 var _getUsers = require("../servicios/getUsers");
 var _postUsers = require("../servicios/postUsers");
+var _updateUsers = require("../servicios/updateUsers");
 const nombre = document.getElementById("nombre");
 const apellido = document.getElementById("apellido");
 const cedula = document.getElementById("cedula");
 const tarea = document.getElementById("tarea");
 const edad = document.getElementById("edad");
 const btnCrear = document.getElementById("crear");
+const btnActualizar = document.getElementById("actualizar");
 const mensaje = document.getElementById("mensaje");
 //Función para manejar el evento click del botón
 async function crearUsuario() {
@@ -599,8 +601,11 @@ async function crearUsuario() {
 }
 // Asignar la función al evento click del botón
 btnCrear.addEventListener("click", crearUsuario);
+async function actualizarUsuario(cedula) {
+    const cedulaUsuario = cedula.value;
+}
 
-},{"../servicios/getUsers":"dX0Mz","../servicios/postUsers":"5LuWf"}],"dX0Mz":[function(require,module,exports) {
+},{"../servicios/getUsers":"dX0Mz","../servicios/postUsers":"5LuWf","../servicios/updateUsers":"2kejJ"}],"dX0Mz":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "getUsers", ()=>getUsers);
@@ -684,6 +689,29 @@ async function postUsers(nombre, apellido, cedula, tarea, edad) {
         return {
             message: "Error al agregar usuario."
         };
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2kejJ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "updateUsers", ()=>updateUsers);
+async function updateUsers(cedula) {
+    try {
+        const userData = {
+            cedula
+        };
+        const response = await fetch("http://localhost:3001/users/" + id, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(userData)
+        });
+        return await response.json();
+    } catch (error) {
+        console.error("Error update user:", error);
+        throw error;
     }
 }
 

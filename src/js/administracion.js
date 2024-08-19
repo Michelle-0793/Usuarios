@@ -3,18 +3,15 @@ import { getUsers } from "../servicios/getUsers";
 
 import { postUsers } from "../servicios/postUsers";
 
+import { updateUsers } from "../servicios/updateUsers";
+
 const nombre = document.getElementById("nombre");
-
 const apellido = document.getElementById("apellido");
-
 const cedula = document.getElementById("cedula");
-
 const tarea = document.getElementById("tarea");
-
 const edad = document.getElementById("edad");
-
 const btnCrear = document.getElementById("crear");
-
+const btnActualizar = document.getElementById("actualizar");
 const mensaje = document.getElementById("mensaje");
 
 //Función para manejar el evento click del botón
@@ -49,14 +46,18 @@ async function crearUsuario() {
         return;
       
       }else{
-            
+
 //Crear un nuevo usario con post
       const response = await postUsers(nombreUsuario, apellidoUsuario, cedulaUsuario, tareaUsuario, edadUsuario);
       mensaje.textContent = "Usuario agregado exitosamente"
 
       }
-
 }
+
 // Asignar la función al evento click del botón
 btnCrear.addEventListener("click", crearUsuario);
 
+async function actualizarUsuario(cedula) {
+      const cedulaUsuario = cedula.value;
+      
+}
