@@ -579,22 +579,23 @@ async function crearUsuario() {
         mensaje.textContent = "Debe llenar todos los campos";
         return;
     }
-    // Obtener usuarios para verificar la cédula, con get
-    const usuarios = await (0, _getUsers.getUsers)();
-    const cédulaExistente = usuarios.find((user)=>user.cedula === cedulaUsuario);
-    if (cédulaExistente) {
-        mensaje.textContent = "La c\xe9dula ya est\xe1 registrada.";
-        return;
-    }
-    //Crear un nuevo usario con post
-    const response = await (0, _postUsers.postUsers)(nombreUsuario, apellidoUsuario, cedulaUsuario, tareaUsuario, edadUsuario);
-    mensaje.textContent = response.message || "Usuario agregado exitosamente";
     // Limpiar los campos
     nombre.value = "";
     apellido.value = "";
     cedula.value = "";
     tarea.value = "";
     edad.value = "";
+    // Obtener usuarios para verificar la cédula, con get
+    const usuarios = await (0, _getUsers.getUsers)();
+    const cédulaExistente = usuarios.find((user)=>user.cedula === cedulaUsuario);
+    if (cédulaExistente) {
+        mensaje.textContent = "La c\xe9dula ya est\xe1 registrada";
+        return;
+    } else {
+        //Crear un nuevo usario con post
+        const response = await (0, _postUsers.postUsers)(nombreUsuario, apellidoUsuario, cedulaUsuario, tareaUsuario, edadUsuario);
+        mensaje.textContent = "Usuario agregado exitosamente";
+    }
 }
 // Asignar la función al evento click del botón
 btnCrear.addEventListener("click", crearUsuario);
@@ -602,7 +603,7 @@ btnCrear.addEventListener("click", crearUsuario);
 },{"../servicios/getUsers":"dX0Mz","../servicios/postUsers":"5LuWf"}],"dX0Mz":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "getUsersetUsers", ()=>getUsersetUsers);
+parcelHelpers.export(exports, "getUsers", ()=>getUsers);
 async function getUsers() {
     try {
         // Realiza una solicitud GET a la URL especificada

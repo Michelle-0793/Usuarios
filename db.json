@@ -1,3 +1,20 @@
 {
-  "users": []
+  "users": [
+    {
+      "id": "a7fe",
+      "nombre": "Michelle",
+      "apellido": "López",
+      "cedula": "503950473",
+      "tarea": "diseñar",
+      "edad": "30"
+    },
+    {
+      "id": "0e9e",
+      "nombre": "Karen",
+      "apellido": "López",
+      "cedula": "503020841",
+      "tarea": "cocinar",
+      "edad": "46"
+    }
+  ]
 }

@@ -18,4 +18,4 @@ async function getUsers() {
     }
 }
 
-export {getUsersetUsers};
+export {getUsers};
